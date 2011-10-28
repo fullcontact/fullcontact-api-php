@@ -1,12 +1,12 @@
 <?php
-include_once('../src/Rainmaker.php');
+include_once('../src/FullContact.php');
 
-//initialize our Rainmaker API object
-//get your api key here:  http://rainmaker.cc/api/
-$rainmaker = new RainmakerAPI('YOUR_API_KEY_HERE');
+//initialize our FullContact API object
+//get your api key here:  http://fullcontact.com/getkey
+$fullcontact = new FullContactAPI('YOUR_API_KEY_HERE');
 
 //do a lookup
-$result = $rainmaker->doLookup('lorangb@gmail.com');
+$result = $fullcontact->doLookup('bart@fullcontact.com');
 
 //dump our results
 echo "<br/>----------------<br/><pre>";

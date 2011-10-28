@@ -2,10 +2,10 @@
 /*
  * PUT LICENSE HERE
  */
-define ("BASE_URL", "http://api.rainmaker.cc/");
+define ("BASE_URL", "https://api.fullcontact.com/");
 define ("API_VERSION", "v1");
 
-class RainmakerAPI {
+class FullContactAPI {
     
     private $_apiKey = null;
     
@@ -114,5 +114,5 @@ class RainmakerAPI {
         
         return $return_value;
     }//end restHelper
-}//end RainmakerAPI
+}//end FullContactAPI
 ?>
