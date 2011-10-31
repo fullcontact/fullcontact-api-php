@@ -10,7 +10,6 @@ class FullContactAPI {
     private $_apiKey = null;
     
     /*
-     * Initialize a new ReportGridAPI object
      *
      * @param String $token_id
      * 
