@@ -3,7 +3,7 @@
  * PUT LICENSE HERE
  */
 define ("BASE_URL", "https://api.fullcontact.com/");
-define ("API_VERSION", "v1");
+define ("API_VERSION", "v2");
 
 class FullContactAPI {
     
