@@ -5,10 +5,19 @@
 define ("BASE_URL", "https://api.fullcontact.com/");
 define ("API_VERSION", "v2");
 
+class FullContactAPIException extends Exception{
+
+}
+
 class FullContactAPI {
 
     private $_apiKey = null;
 
+    /**
+     * Supported lookup methods
+     * @var $_supportedMethods
+     */
+    private $_supportedMethods = array('email', 'phone', 'twitter', 'facebookUsername');
     /*
     *
     * @param String $token_id
@@ -28,6 +37,10 @@ class FullContactAPI {
     * @return Array - All information associated with this email address
     */
     public function doLookup($term = null, $type="email", $timeout = 30) {
+        if(!in_array($type, $this->_supportedMethods)){
+            throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
+        }
+
         $return_value = null;
 
         if ($term != null) {
