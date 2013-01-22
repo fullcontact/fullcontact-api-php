@@ -33,16 +33,20 @@ class FullContactAPI {
      * Return an array of data about a specific email address
      *
      * @param String - Email address
-     * @param String (optional) - timeout
+     * @param String (optional, depcrecated) - timeout
      *
      * @return Array - All information associated with this email address
      */
-    public function doLookup($email = null, $timeout = 30) {
+    public function doLookup($email = null, $timeout = 0) {
         $return_value = null;
         
         if ($email != null) {
             
-            $result = $this->restHelper(BASE_URL . API_VERSION . "/person.json?email=" . urlencode($email) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
+			$url = BASE_URL . API_VERSION . "/person.json?email=" . urlencode($email) . "&apiKey=" . urlencode($this->_apiKey);
+			if ($timeout > 0) {
+				$url .= "&timeoutSeconds=" . urlencode($timeout);
+			}
+            $result = $this->restHelper($url);
             
             if ($result != null) {
                 $return_value = $result;
