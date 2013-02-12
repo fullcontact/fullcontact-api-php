@@ -16,37 +16,47 @@ limitations under the License.
 define ("BASE_URL", "https://api.fullcontact.com/");
 define ("API_VERSION", "v2");
 
+class FullContactAPIException extends Exception{
+
+}
+
 class FullContactAPI {
 
     private $_apiKey = null;
 
-    /*
-     *
-     * @param String $token_id
-     *
+    /**
+     * Supported lookup methods
+     * @var $_supportedMethods
      */
+    private $_supportedMethods = array('email', 'phone', 'twitter', 'facebookUsername');
+    /*
+    *
+    * @param String $token_id
+    *
+    */
     public function __construct($api_key) {
         $this->_apiKey = $api_key;
     }
 
     /*
-     * Return an array of data about a specific email address
-     *
-     * @param String - Email address
-     * @param String (optional, depcrecated) - timeout
-     *
-     * @return Array - All information associated with this email address
-     */
-    public function doLookup($email = null, $timeout = 0) {
+    * Return an array of data about a specific email address/phone number -- Mario Falomir http://github.com/mariofalomir
+    *
+    * @param String - Search Term (Could be an email address or a phone number, depending on the specified search type)
+    * @param String - Search Type (Specify the API search method to use. E.g. email -- tested with email and phone)
+    * @param String (optional) - timeout
+    *
+    * @return Array - All information associated with this email address
+    */
+    public function doLookup($term = null, $type="email", $timeout = 30) {
+        if(!in_array($type, $this->_supportedMethods)){
+            throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
+        }
+
         $return_value = null;
 
-        if ($email != null) {
+        if ($term != null) {
 
-            $url = BASE_URL . API_VERSION . "/person.json?email=" . urlencode($email) . "&apiKey=" . urlencode($this->_apiKey);
-            if ($timeout > 0) {
-                $url .= "&timeoutSeconds=" . urlencode($timeout);
-            }
-            $result = $this->restHelper($url);
+            $result = $this->restHelper(BASE_URL . API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
 
             if ($result != null) {
                 $return_value = $result;
@@ -56,8 +66,8 @@ class FullContactAPI {
         return $return_value;
     }
 
-/****************************************************************************/
-/****************************************************************************/
+    /****************************************************************************/
+    /****************************************************************************/
 
     /*********************************
      **** PRIVATE helper function ****
