@@ -13,8 +13,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-define ("BASE_URL", "https://api.fullcontact.com/");
-define ("API_VERSION", "v2");
+define ("FC_BASE_URL", "https://api.fullcontact.com/");
+define ("FC_API_VERSION", "v2");
+define ("FC_USER_AGENT", "FullContact/PHP 0.2");
 
 class FullContactAPIException extends Exception{
 
@@ -56,7 +57,7 @@ class FullContactAPI {
 
         if ($term != null) {
 
-            $result = $this->restHelper(BASE_URL . API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
+            $result = $this->restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
 
             if ($result != null) {
                 $return_value = $result;
@@ -84,6 +85,7 @@ class FullContactAPI {
 
         $curl = curl_init($json_endpoint);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_USERAGENT, FC_USER_AGENT);
 
         $response = curl_exec($curl);
 
