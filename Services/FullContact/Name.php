@@ -7,7 +7,7 @@
  * @author   Keith Casey <contrib@caseysoftware.com>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache
  */
-class Services_FullContact_Name
+class Services_FullContact_Name extends Services_FullContact
 {
     public $response_obj  = null;
     public $response_code = null;
@@ -19,9 +19,15 @@ class Services_FullContact_Name
      * Supported lookup methods
      * @var $_supportedMethods
      */
-    private $_supportedMethods = array('normalize', 'deducer', 'similarity', 'stats', 'parser');
+    private $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
 
-    public function normalize($name) { }
+    public function normalize($name, $casing = 'titlecase')
+    {
+        $this->runQuery($name, 'normalizer', 'q', $casing);
+
+        return $this->response_obj;
+    }
+
     public function deducer($name) { }
     public function similarity($name) { }
     public function stats($name) { }
@@ -50,19 +56,17 @@ class Services_FullContact_Name
      *
      * @return Array - All information associated with this email address
      */
-    public function doLookup($term = null, $type="email", $timeout = 30)
+    public function runQuery($term = null, $method = 'normalizer', $search = "email", $casing = 'titlecase')
     {
-        if(!in_array($type, $this->_supportedMethods)){
-            throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
-        if(!in_array($search, $this->_supportedMethods)){
-            throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
+        if(!in_array($method, $this->_supportedMethods)){
+            throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$method}]");
         }
 
         $return_value = null;
 
         if ($term != null) {
 
-            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
+            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/name/" . $method . ".json?{$search}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey));
 
             if ($result != null) {
                 $return_value = $result;
