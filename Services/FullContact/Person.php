@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This class doesn't do much yet..
+ * This class handles everything related to the Person lookup API.
  *
  * @package  Services\FullContact
  * @author   Keith Casey <contrib@caseysoftware.com>

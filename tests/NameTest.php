@@ -53,4 +53,23 @@ class NameTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($name->nameDetails->nicknames));
         $this->assertEquals('John Michael Smith', $name->nameDetails->fullName);
     }
+
+    public function testDeducer()
+    {
+        $name = $this->name->deducer('caseysoftware', 'username');
+        $this->assertEquals('Casey', $name->nameDetails->givenName);
+        $this->assertEquals('Casey', $name->nameDetails->fullName);
+
+        $name = $this->name->deducer('mike@example.com');
+        $this->assertEquals('Mike', $name->nameDetails->givenName);
+        $this->assertEquals('Mike', $name->nameDetails->fullName);
+
+        $name = $this->name->deducer('fake@example.com');
+        $this->assertEquals('Fake', $name->nameDetails->familyName);
+        $this->assertEquals('Fake', $name->nameDetails->fullName);
+
+        $name = $this->name->deducer('fake@example.com', 'email', 'uppercase');
+        $this->assertEquals('FAKE', $name->nameDetails->givenName);
+        $this->assertEquals('FAKE', $name->nameDetails->familyName);
+    }
 }

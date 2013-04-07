@@ -15,6 +15,13 @@ class Services_FullContact_Name extends Services_FullContact
      */
     private $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
 
+    /**
+     * This takes a name and breaks it into its individual parts.
+     *
+     * @param type $name
+     * @param type $casing -> valid values are uppercase, lowercase, titlecase
+     * @return type
+     */
     public function normalize($name, $casing = 'titlecase')
     {
         $this->runQuery($name, 'normalizer', 'q', $casing);
@@ -22,7 +29,22 @@ class Services_FullContact_Name extends Services_FullContact
         return $this->response_obj;
     }
 
-    public function deducer($name) { }
+    /**
+     * This resolves a person's name from either their email address or a
+     *   username. This is basically a wrapper for the Person lookup methods.
+     *
+     * @param type $name
+     * @param type $type -> valid values are email and username
+     * @param type $casing -> valid values are uppercase, lowercase, titlecase
+     * @return type
+     */
+    public function deducer($value, $type = 'email', $casing = 'titlecase')
+    {
+        $this->runQuery($value, 'deducer', $type, $casing);
+
+        return $this->response_obj;
+    }
+
     public function similarity($name) { }
     public function stats($name) { }
     public function parser($name) { }
@@ -49,7 +71,8 @@ class Services_FullContact_Name extends Services_FullContact
 
         if ($term != null) {
 
-            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/name/" . $method . ".json?{$search}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey));
+            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/name/" . $method . ".json?{$search}=" . urlencode($term) .
+                    "&casing=" . $casing . "&apiKey=" . urlencode($this->_apiKey));
 
             if ($result != null) {
                 $return_value = $result;
