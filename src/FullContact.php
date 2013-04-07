@@ -114,6 +114,9 @@ class FullContactAPI {
         if ($response) {
             //Save the response code in case of error
             $curl_response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            $this->response_code = $curl_response_code;
+            $this->response_json = $response;
+            $this->response_obj  = json_decode($this->response_json);
 
             //We're receiving stream data back from the API, json decode it here.
             $result = json_decode($response, true);

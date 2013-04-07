@@ -24,5 +24,9 @@ include_once '../src/FullContact.php';
  */
 class Services_FullContact extends FullContactAPI
 {
+    public $response_obj  = null;
+    public $response_code = null;
+    public $response_json = null;
+
     
 }
