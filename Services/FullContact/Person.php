@@ -9,12 +9,6 @@
  */
 class Services_FullContact_Person extends Services_FullContact
 {
-    public $response_obj  = null;
-    public $response_code = null;
-    public $response_json = null;
-
-    private $_apiKey = null;
-
     /**
      * Supported lookup methods
      * @var $_supportedMethods
@@ -47,17 +41,6 @@ class Services_FullContact_Person extends Services_FullContact
         $this->doLookup($facebook, 'facebookUsername');
 
         return $this->response_obj;
-    }
-
-    /**
-     * The base constructor needs the API key available from here:
-     * http://fullcontact.com/getkey
-     *
-     * @param type $api_key
-     */
-    public function __construct($api_key)
-    {
-        $this->_apiKey = $api_key;
     }
 
     /**

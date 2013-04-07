@@ -26,9 +26,20 @@ define ("FC_USER_AGENT", "caseysoftware/fullcontact-php 0.1");
  */
 class Services_FullContact
 {
+    protected $_apiKey = null;
+
     public $response_obj  = null;
     public $response_code = null;
     public $response_json = null;
 
-    
+    /**
+     * The base constructor needs the API key available from here:
+     * http://fullcontact.com/getkey
+     *
+     * @param type $api_key
+     */
+    public function __construct($api_key)
+    {
+        $this->_apiKey = $api_key;
+    }
 }
