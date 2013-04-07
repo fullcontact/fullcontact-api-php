@@ -30,24 +30,29 @@ class FullContactAPI {
      * @var $_supportedMethods
      */
     private $_supportedMethods = array('email', 'phone', 'twitter', 'facebookUsername');
-    /*
-    *
-    * @param String $token_id
-    *
-    */
+
+    /**
+     * The base constructor needs the API key available from here:
+     * http://fullcontact.com/getkey
+     *
+     * @param type $api_key
+     */
     public function __construct($api_key) {
         $this->_apiKey = $api_key;
     }
 
-    /*
-    * Return an array of data about a specific email address/phone number -- Mario Falomir http://github.com/mariofalomir
-    *
-    * @param String - Search Term (Could be an email address or a phone number, depending on the specified search type)
-    * @param String - Search Type (Specify the API search method to use. E.g. email -- tested with email and phone)
-    * @param String (optional) - timeout
-    *
-    * @return Array - All information associated with this email address
-    */
+    /**
+     * Return an array of data about a specific email address/phone number
+     *   -- Mario Falomir http://github.com/mariofalomir
+     *
+     * @param String - Search Term (Could be an email address or a phone number,
+     *   depending on the specified search type)
+     * @param String - Search Type (Specify the API search method to use.
+     *   E.g. email -- tested with email and phone)
+     * @param String (optional) - timeout
+     *
+     * @return Array - All information associated with this email address
+     */
     public function doLookup($term = null, $type="email", $timeout = 30) {
         if(!in_array($type, $this->_supportedMethods)){
             throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
@@ -67,13 +72,14 @@ class FullContactAPI {
         return $return_value;
     }
 
-    /****************************************************************************/
-    /****************************************************************************/
-
-    /*********************************
-     **** PRIVATE helper function ****
-     *********************************/
     function restHelper($json_endpoint) {
+    /**
+     * @access private
+     *
+     * @param type $json_endpoint
+     * @return boolean
+     * @throws Exception
+     */
 
         $return_value = null;
 
