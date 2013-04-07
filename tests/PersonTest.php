@@ -35,10 +35,11 @@ class PersonTest extends PHPUnit_Framework_TestCase
 
     public function testLookupByPhone()
     {
-        $person = $this->person->lookupByPhone('7039638997');
+        $person = $this->person->lookupByPhone('3037170414');
 
-        $this->assertEquals('Keith',    $person->contactInfo->givenName);
-        $this->assertGreaterThan(5 ,    count($person->socialProfiles));
+        $this->assertEquals('Bart', $person->contactInfo->givenName);
+        $this->assertGreaterThan(5, count($person->contactInfo->websites));
+        $this->assertGreaterThan(5, count($person->socialProfiles));
     }
 
     public function testLookupByTwitter()
