@@ -122,4 +122,3 @@ class FullContactAPI {
         return $return_value;
     }//end restHelper
 }//end FullContactAPI
-?>
