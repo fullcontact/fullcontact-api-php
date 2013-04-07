@@ -13,7 +13,7 @@ function Services_FullContact_autoload($className) {
 
 spl_autoload_register('Services_FullContact_autoload');
 
-include_once '../src/FullContact.php';
+include_once 'src/FullContact.php';
 
 /**
  * This class doesn't do much yet..
