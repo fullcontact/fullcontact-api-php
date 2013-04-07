@@ -55,7 +55,7 @@ class Services_FullContact_Person extends Services_FullContact
      *
      * @return Array - All information associated with this email address
      */
-    public function doLookup($term = null, $type="email", $timeout = 30)
+    protected function doLookup($term = null, $type="email", $timeout = 30)
     {
         if(!in_array($type, $this->_supportedMethods)){
             throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
@@ -95,7 +95,7 @@ class Services_FullContact_Person extends Services_FullContact
      * @return boolean
      * @throws Exception
      */
-    private function _restHelper($json_endpoint)
+    protected function _restHelper($json_endpoint)
     {
 
         $return_value = null;
