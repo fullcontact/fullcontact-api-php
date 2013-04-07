@@ -13,7 +13,9 @@ function Services_FullContact_autoload($className) {
 
 spl_autoload_register('Services_FullContact_autoload');
 
-include_once 'src/FullContact.php';
+define ("FC_BASE_URL", "https://api.fullcontact.com/");
+define ("FC_API_VERSION", "v2");
+define ("FC_USER_AGENT", "caseysoftware/fullcontact-php 0.1");
 
 /**
  * This class doesn't do much yet..
@@ -22,7 +24,7 @@ include_once 'src/FullContact.php';
  * @author   Keith Casey <contrib@caseysoftware.com>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache
  */
-class Services_FullContact extends FullContactAPI
+class Services_FullContact
 {
     public $response_obj  = null;
     public $response_code = null;

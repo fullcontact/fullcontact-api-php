@@ -7,7 +7,7 @@
  * @author   Keith Casey <contrib@caseysoftware.com>
  * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache
  */
-class Services_FullContact_Person
+class Services_FullContact_Person extends Services_FullContact
 {
     public $response_obj  = null;
     public $response_code = null;
@@ -75,7 +75,7 @@ class Services_FullContact_Person
     public function doLookup($term = null, $type="email", $timeout = 30)
     {
         if(!in_array($type, $this->_supportedMethods)){
-            throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
+            throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
         }
 
         $return_value = null;
