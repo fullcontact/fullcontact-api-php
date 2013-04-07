@@ -37,7 +37,8 @@ class FullContactAPI {
      *
      * @param type $api_key
      */
-    public function __construct($api_key) {
+    public function __construct($api_key)
+    {
         $this->_apiKey = $api_key;
     }
 
@@ -53,7 +54,8 @@ class FullContactAPI {
      *
      * @return Array - All information associated with this email address
      */
-    public function doLookup($term = null, $type="email", $timeout = 30) {
+    public function doLookup($term = null, $type="email", $timeout = 30)
+    {
         if(!in_array($type, $this->_supportedMethods)){
             throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
         }
@@ -79,7 +81,8 @@ class FullContactAPI {
      * @return boolean
      * @throws Exception
      */
-    private function _restHelper($json_endpoint) {
+    private function _restHelper($json_endpoint)
+    {
 
         $return_value = null;
 
