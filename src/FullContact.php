@@ -62,7 +62,7 @@ class FullContactAPI {
 
         if ($term != null) {
 
-            $result = $this->restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
+            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
 
             if ($result != null) {
                 $return_value = $result;
@@ -72,7 +72,6 @@ class FullContactAPI {
         return $return_value;
     }
 
-    function restHelper($json_endpoint) {
     /**
      * @access private
      *
@@ -80,6 +79,7 @@ class FullContactAPI {
      * @return boolean
      * @throws Exception
      */
+    private function _restHelper($json_endpoint) {
 
         $return_value = null;
 
