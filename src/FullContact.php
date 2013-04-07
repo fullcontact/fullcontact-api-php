@@ -75,6 +75,19 @@ class FullContactAPI {
     }
 
     /**
+     * @access public
+     * @deprecated
+     *
+     * @param type $json_endpoint
+     */
+    public function restHelper($json_endpoint)
+    {
+        trigger_error("The public restHelper() method has been deprecated since it was intended to be private anyway.", E_USER_NOTICE);
+
+        return $this->_restHelper($json_endpoint);
+    }
+
+    /**
      * @access private
      *
      * @param type $json_endpoint
