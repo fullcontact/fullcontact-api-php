@@ -20,7 +20,7 @@ include_once '../src/FullContact.php';
  *
  * @package  Services\FullContact
  * @author   Keith Casey <contrib@caseysoftware.com>
- * @license  http://creativecommons.org/licenses/MIT/ MIT
+ * @license  http://www.apache.org/licenses/LICENSE-2.0 Apache
  */
 class Services_FullContact extends FullContactAPI
 {
