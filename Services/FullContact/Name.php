@@ -13,7 +13,7 @@ class Services_FullContact_Name extends Services_FullContact
      * Supported lookup methods
      * @var $_supportedMethods
      */
-    private $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
+    protected $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
     protected $_resourceUri = '';
 
     /**
@@ -25,7 +25,8 @@ class Services_FullContact_Name extends Services_FullContact
      */
     public function normalize($name, $casing = 'titlecase')
     {
-        $this->runQuery($name, 'normalizer', 'q', $casing);
+        $this->_resourceUri = '/name/normalizer.json';
+        $this->_execute(array('q' => $name, 'method' => 'normalizer', 'casing' => $casing));
 
         return $this->response_obj;
     }
@@ -41,7 +42,8 @@ class Services_FullContact_Name extends Services_FullContact
      */
     public function deducer($value, $type = 'email', $casing = 'titlecase')
     {
-        $this->runQuery($value, 'deducer', $type, $casing);
+        $this->_resourceUri = '/name/deducer.json';
+        $this->_execute(array($type => $value, 'method' => 'deducer', 'casing' => $casing));
 
         return $this->response_obj;
     }
@@ -51,35 +53,36 @@ class Services_FullContact_Name extends Services_FullContact
     public function parser($name) { }
 
     /**
-     * Return an array of data about a specific email address/phone number
-     *   -- Mario Falomir http://github.com/mariofalomir
+     * This is a pretty close copy of my work on the Contactually PHP library
+     *   available here: http://github.com/caseysoftware/contactually-php
      *
-     * @param String - Search Term (Could be an email address or a phone number,
-     *   depending on the specified search type)
-     * @param String - Search Type (Specify the API search method to use.
-     *   E.g. email -- tested with email and phone)
-     * @param String (optional) - timeout
-     *
-     * @return Array - All information associated with this email address
+     * @author  Keith Casey <contrib@caseysoftware.com>
+     * @param   array $params
+     * @return  object
+     * @throws  Services_FullContact_Exception_NotImplemented
      */
-    protected function runQuery($term = null, $method = 'normalizer', $search = "email", $casing = 'titlecase')
+    protected function _execute($params = array())
     {
-        if(!in_array($method, $this->_supportedMethods)){
-            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ . " does not support the [{$method}] method");
+        if(!in_array($params['method'], $this->_supportedMethods)){
+            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ .
+                    " does not support the [" . $params['method'] . "] lookup method");
         }
 
-        $return_value = null;
+        $params['apiKey'] = urlencode($this->_apiKey);
 
-        if ($term != null) {
+        $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
+                '?' . http_build_query($params);
 
-            $this->_resourceUri = '/name/' . $method . '.json';
-            $result = $this->_restHelper("?{$search}=" . urlencode($term) . "&casing=" . $casing);
+        //open connection
+        $connection = curl_init($fullUrl);
+        curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
 
-            if ($result != null) {
-                $return_value = $result;
-            }//end inner if
-        }//end outer if
+        //execute request
+        $this->response_json = curl_exec($connection);
+        $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
+        $this->response_obj  = json_decode($this->response_json);
 
-        return $return_value;
+        return $this->response_obj;
     }
 }
