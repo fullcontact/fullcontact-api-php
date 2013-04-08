@@ -64,7 +64,7 @@ class Services_FullContact_Name extends Services_FullContact
     protected function runQuery($term = null, $method = 'normalizer', $search = "email", $casing = 'titlecase')
     {
         if(!in_array($method, $this->_supportedMethods)){
-            throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$method}]");
+            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ . " does not support the [{$method}] method");
         }
 
         $return_value = null;

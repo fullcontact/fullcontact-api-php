@@ -58,7 +58,7 @@ class Services_FullContact_Person extends Services_FullContact
     protected function doLookup($term = null, $type="email", $timeout = 30)
     {
         if(!in_array($type, $this->_supportedMethods)){
-            throw new Services_FullContact_Exception_Base("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
+            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ . " does not support the [{$method}] method");
         }
 
         $return_value = null;
