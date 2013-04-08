@@ -71,7 +71,7 @@ class Services_FullContact_Name extends Services_FullContact
 
         if ($term != null) {
 
-            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/name/" . $method . ".json?{$search}=" . urlencode($term) .
+            $result = $this->_restHelper($this->_baseUri . $this->_version . "/name/" . $method . ".json?{$search}=" . urlencode($term) .
                     "&casing=" . $casing . "&apiKey=" . urlencode($this->_apiKey));
 
             if ($result != null) {

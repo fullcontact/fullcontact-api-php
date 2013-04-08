@@ -69,7 +69,7 @@ class NameTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Fake', $name->nameDetails->fullName);
 
         $name = $this->name->deducer('fake@example.com', 'email', 'uppercase');
-        $this->assertEquals('FAKE', $name->nameDetails->givenName);
+        $this->assertEquals('FAKE', $name->nameDetails->fullName);
         $this->assertEquals('FAKE', $name->nameDetails->familyName);
     }
 }

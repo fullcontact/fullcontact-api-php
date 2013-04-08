@@ -13,12 +13,8 @@ function Services_FullContact_autoload($className) {
 
 spl_autoload_register('Services_FullContact_autoload');
 
-define ("FC_BASE_URL", "https://api.fullcontact.com/");
-define ("FC_API_VERSION", "v2");
-define ("FC_USER_AGENT", "caseysoftware/fullcontact-php 0.1");
-
 /**
- * This class doesn't do much yet..
+ * This class handles the actually HTTP request to the FullContact endpoint.
  *
  * @package  Services\FullContact
  * @author   Keith Casey <contrib@caseysoftware.com>
@@ -26,6 +22,11 @@ define ("FC_USER_AGENT", "caseysoftware/fullcontact-php 0.1");
  */
 class Services_FullContact
 {
+    const USER_AGENT = 'caseysoftware/fullcontact-php 0.1';
+
+    protected $_baseUri = 'https://api.fullcontact.com/';
+    protected $_version = 'v2';
+
     protected $_apiKey = null;
 
     public $response_obj  = null;
@@ -63,7 +64,7 @@ class Services_FullContact
 
         $curl = curl_init($json_endpoint);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_USERAGENT, FC_USER_AGENT);
+        curl_setopt($curl, CURLOPT_USERAGENT, self::USER_AGENT);
 
         $response = curl_exec($curl);
 
