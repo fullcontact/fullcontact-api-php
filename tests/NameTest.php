@@ -24,6 +24,15 @@ class NameTest extends PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
+    public function testFailAPIKey()
+    {
+        $brokenRequest = new Services_FullContact_Name('nope, no good');
+
+        $name = $brokenRequest->normalize('John');
+        $this->assertEquals('403', $name->status);
+        $this->assertRegExp('/invalid/i', $name->message);
+    }
+
     public function testNormalize()
     {
         $name = $this->name->normalize('John');
