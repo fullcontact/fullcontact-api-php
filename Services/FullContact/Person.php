@@ -14,6 +14,7 @@ class Services_FullContact_Person extends Services_FullContact
      * @var $_supportedMethods
      */
     private $_supportedMethods = array('email', 'phone', 'twitter', 'facebookUsername');
+    protected $_resourceUri = '/person.json';
 
     public function lookupByEmail($email)
     {
@@ -65,7 +66,7 @@ class Services_FullContact_Person extends Services_FullContact
 
         if ($term != null) {
 
-            $result = $this->_restHelper("/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey));
+            $result = $this->_restHelper($this->_resourceUri . "?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey));
 
             if ($result != null) {
                 $return_value = $result;

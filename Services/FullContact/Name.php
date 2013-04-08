@@ -14,6 +14,7 @@ class Services_FullContact_Name extends Services_FullContact
      * @var $_supportedMethods
      */
     private $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
+    protected $_resourceUri = '';
 
     /**
      * This takes a name and breaks it into its individual parts.
@@ -71,7 +72,8 @@ class Services_FullContact_Name extends Services_FullContact
 
         if ($term != null) {
 
-            $result = $this->_restHelper("/name/" . $method . ".json?{$search}=" . urlencode($term) .
+            $this->_resourceUri = '/name/' . $method . '.json';
+            $result = $this->_restHelper($this->_resourceUri . "?{$search}=" . urlencode($term) .
                     "&casing=" . $casing . "&apiKey=" . urlencode($this->_apiKey));
 
             if ($result != null) {
