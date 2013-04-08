@@ -48,41 +48,16 @@ class Services_FullContact_Name extends Services_FullContact
         return $this->response_obj;
     }
 
-    public function similarity($name) { }
-    public function stats($name) { }
-    public function parser($name) { }
-
-    /**
-     * This is a pretty close copy of my work on the Contactually PHP library
-     *   available here: http://github.com/caseysoftware/contactually-php
-     *
-     * @author  Keith Casey <contrib@caseysoftware.com>
-     * @param   array $params
-     * @return  object
-     * @throws  Services_FullContact_Exception_NotImplemented
-     */
-    protected function _execute($params = array())
+    public function similarity()
     {
-        if(!in_array($params['method'], $this->_supportedMethods)){
-            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ .
-                    " does not support the [" . $params['method'] . "] lookup method");
-        }
-
-        $params['apiKey'] = urlencode($this->_apiKey);
-
-        $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
-                '?' . http_build_query($params);
-
-        //open connection
-        $connection = curl_init($fullUrl);
-        curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
-
-        //execute request
-        $this->response_json = curl_exec($connection);
-        $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
-        $this->response_obj  = json_decode($this->response_json);
-
-        return $this->response_obj;
+        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
+    }
+    public function stats()
+    {
+        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
+    }
+    public function parser()
+    {
+        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
     }
 }

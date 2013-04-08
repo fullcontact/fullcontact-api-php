@@ -45,65 +45,36 @@ class Services_FullContact
     }
 
     /**
-     * @access protected
+     * This is a pretty close copy of my work on the Contactually PHP library
+     *   available here: http://github.com/caseysoftware/contactually-php
      *
-     * @param type $json_endpoint
-     * @return boolean
-     * @throws Exception
+     * @author  Keith Casey <contrib@caseysoftware.com>
+     * @param   array $params
+     * @return  object
+     * @throws  Services_FullContact_Exception_NotImplemented
      */
-    protected function _restHelper($json_endpoint)
+    protected function _execute($params = array())
     {
+        if(!in_array($params['method'], $this->_supportedMethods)){
+            throw new Services_FullContact_Exception_NotImplemented(__CLASS__ .
+                    " does not support the [" . $params['method'] . "] method");
+        }
 
-        $return_value = null;
-
-        $http_params = array(
-            'http' => array(
-                'method' => "GET",
-                'ignore_errors' => true
-        ));
+        $params['apiKey'] = urlencode($this->_apiKey);
 
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
-                $json_endpoint . "&apiKey=" . urlencode($this->_apiKey);
+                '?' . http_build_query($params);
 
-        $curl = curl_init($fullUrl);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_USERAGENT, self::USER_AGENT);
+        //open connection
+        $connection = curl_init($fullUrl);
+        curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
 
-        $response = curl_exec($curl);
+        //execute request
+        $this->response_json = curl_exec($connection);
+        $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
+        $this->response_obj  = json_decode($this->response_json);
 
-        if ($response) {
-            //Save the response code in case of error
-            $curl_response_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-            $this->response_code = $curl_response_code;
-            $this->response_json = $response;
-            $this->response_obj  = json_decode($this->response_json);
-
-            //We're receiving stream data back from the API, json decode it here.
-            $result = json_decode($response, true);
-
-            //if result is NULL we have some sort of error
-            if ($result === null) {
-                $return_value = array();
-                $return_value['is_error'] = true;
-
-                if (strpos($curl_response_code, "403") !== false) {
-                    $return_value['error_message'] = "Your API key is invalid, missing, or has exceeded its quota.";
-
-                } else if (strpos($curl_response_code, "422") !== false) {
-                    $return_value['error_message'] = "The server understood the content type and syntax of the request but was unable to process the contained instructions (Invalid email).";
-                }
-
-            } else {
-                $result['is_error'] = false;
-                $return_value = $result;
-            }// end inner else
-
-        } else {
-            throw new Exception("$verb $json_endpoint failed");
-        }//end outer else
-
-        curl_close($curl);
-
-        return $return_value;
-    }//end restHelper
+        return $this->response_obj;
+    }
 }
