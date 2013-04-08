@@ -73,8 +73,7 @@ class Services_FullContact_Name extends Services_FullContact
         if ($term != null) {
 
             $this->_resourceUri = '/name/' . $method . '.json';
-            $result = $this->_restHelper($this->_resourceUri . "?{$search}=" . urlencode($term) .
-                    "&casing=" . $casing . "&apiKey=" . urlencode($this->_apiKey));
+            $result = $this->_restHelper("?{$search}=" . urlencode($term) . "&casing=" . $casing);
 
             if ($result != null) {
                 $return_value = $result;

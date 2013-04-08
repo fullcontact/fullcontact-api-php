@@ -24,7 +24,7 @@ class PersonTest extends PHPUnit_Framework_TestCase
         parent::setUp();
     }
 
-    public function atestLookupByEmail()
+    public function testLookupByEmail()
     {
         $person = $this->person->lookupByEmail('bart@fullcontact.com');
 

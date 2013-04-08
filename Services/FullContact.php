@@ -62,7 +62,10 @@ class Services_FullContact
                 'ignore_errors' => true
         ));
 
-        $curl = curl_init($this->_baseUri . $this->_version . $json_endpoint);
+        $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
+                $json_endpoint . "&apiKey=" . urlencode($this->_apiKey);
+
+        $curl = curl_init($fullUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_USERAGENT, self::USER_AGENT);
 
