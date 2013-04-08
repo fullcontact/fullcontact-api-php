@@ -48,9 +48,12 @@ class Services_FullContact_Name extends Services_FullContact
         return $this->response_obj;
     }
 
-    public function similarity()
+    public function similarity($name1, $name2, $casing = 'titlecase')
     {
-        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
+        $this->_resourceUri = '/name/similarity.json';
+        $this->_execute(array('q1' => $name1, 'q2' => $name2, 'method' => 'similarity', 'casing' => $casing));
+
+        return $this->response_obj;
     }
     public function stats()
     {

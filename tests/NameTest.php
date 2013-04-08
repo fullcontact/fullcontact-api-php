@@ -81,4 +81,19 @@ class NameTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('FAKE', $name->nameDetails->fullName);
         $this->assertEquals('FAKE', $name->nameDetails->familyName);
     }
+
+    public function testSimilarity()
+    {
+        $result = $this->name->similarity('John', 'Johnathan');
+        $this->assertEquals('200', $result->status);
+        $this->assertGreaterThan(0.8, $result->result->SimMetrics->jaroWinkler->similarity);
+
+        $result = $this->name->similarity('John', 'Mike');
+        $this->assertEquals(0, $result->result->FullContact->BigramAnalysis->dice->similarity);
+
+        $result = $this->name->similarity('Michelle', 'Michael');
+        $this->assertEquals('200', $result->status);
+        $this->assertGreaterThan(0.9, $result->result->SimMetrics->jaroWinkler->similarity);
+        $this->assertEquals(0.625, $result->result->SimMetrics->levenshtein->similarity);
+    }
 }
