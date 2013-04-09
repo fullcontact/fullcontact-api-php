@@ -26,28 +26,28 @@ $this->name = new Services_FullContact_Name($apikey);
 **This library is not complete but here is the active todo list.**
 
 *  For the Person resource
-**  Implement lookup by ~~email~~ and emailMD5
-***  Implement style for outputting (lookup by email only)
-**  ~~Implement lookup by phone~~
-***  Implement countryCode for non-US/Canada phone numbers
-**  ~~Implement lookup by twitter~~
-**  ~~Implement lookup by facebookUsername~~
-**  Implement lookup by vCard
-**  Implement queue and callback for queue-based processing
-**  Implement webhookUrl and webhookId for asynchronous processing
-**  Implement css and prettyPrint for output
-**  Implement Enhanced Lookup retrieval
+ *  Implement lookup by ~~email~~ and emailMD5
+  *  Implement style for outputting (lookup by email only)
+ *  ~~Implement lookup by phone~~
+  *  Implement countryCode for non-US/Canada phone numbers
+ *  ~~Implement lookup by twitter~~
+ *  ~~Implement lookup by facebookUsername~~
+ *  Implement lookup by vCard
+ *  Implement queue and callback for queue-based processing
+ *  Implement webhookUrl and webhookId for asynchronous processing
+ *  Implement css and prettyPrint for output
+ *  Implement Enhanced Lookup retrieval
 *  For the Name resource
-**  ~~Implement normalization with casing~~
-**  Implement deducer using ~~email~~ or username with casing
-**  ~~Implement similarity with casing~~
-**  Implement stats using name, givenName, familyName, and casing
-**  Implement parser with casing
+ *  ~~Implement normalization with casing~~
+ *  Implement deducer using ~~email~~ or username with casing
+ *  ~~Implement similarity with casing~~
+ *  Implement stats using name, givenName, familyName, and casing
+ *  Implement parser with casing
 *  For the Location resource
-**  Implement normalization using includeZeroPopulation and casing
-**  Implement enrichment using includeZeroPopulation and casing
+ *  Implement normalization using includeZeroPopulation and casing
+ *  Implement enrichment using includeZeroPopulation and casing
 *  For the Icon resource
-**  Implement icon retrieval using size and type
+ *  Implement icon retrieval using size and type
 *  Implement the CardShark resource
 *  Implement disposable email address detection
 *  Implement account stats retrieval
