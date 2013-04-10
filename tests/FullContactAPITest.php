@@ -41,18 +41,45 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
         $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
     }
 
+    public function testBadEmail()
+    {
+        $result = $this->client->doLookup('bart@fullcontact');
+        $this->assertEquals(422, $result['status']);
+        $this->assertRegExp('/invalid/i', $result['message']);
+    }
+
     public function testDoLookupPhone()
     {
-        $this->markTestIncomplete();
+        $result = $this->client->doLookup('3037170414', 'phone');
+        $this->assertArrayHasKey('status', $result);
+        $this->assertEquals(200, $result['status']);
+        $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
+        $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
     }
+
+    public function testBadPhone()
+    {
+        $result = $this->client->doLookup('303717');
+        $this->assertEquals(422, $result['status']);
+        $this->assertRegExp('/invalid/i', $result['message']);
+    }
+
 
     public function testDoLookupTwitter()
     {
-        $this->markTestIncomplete();
+        $result = $this->client->doLookup('lorangb', 'twitter');
+        $this->assertArrayHasKey('status', $result);
+        $this->assertEquals(200, $result['status']);
+        $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
+        $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
     }
 
     public function testDoLookupFacebook()
     {
-        $this->markTestIncomplete();
+        $result = $this->client->doLookup('bart.lorang', 'facebookUsername');
+        $this->assertArrayHasKey('status', $result);
+        $this->assertEquals(200, $result['status']);
+        $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
+        $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
     }
 }
