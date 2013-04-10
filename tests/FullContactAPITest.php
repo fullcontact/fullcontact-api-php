@@ -19,6 +19,7 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
         global $apikey;
 
         $this->client_old = new FullContactAPI($apikey);
+        $this->client_new = new Services_FullContact_API($apikey);
 
         parent::setUp();
     }
