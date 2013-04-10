@@ -60,6 +60,7 @@ phpunit tests/
 *  Implement disposable email address detection
 *  Implement account stats retrieval
 *  Update the library to be backwards compatible with the previous official version
+*  Update the test to use Mocks instead of live API hits.. because it could drain your account credits. Doh.
 
 
 ## License
