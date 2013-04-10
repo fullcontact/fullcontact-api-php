@@ -23,6 +23,13 @@ class Services_FullContact_Person extends Services_FullContact
         return $this->response_obj;
     }
 
+    public function lookupByEmailMD5($search)
+    {
+        $this->_execute(array('emailMD5' => $search, 'method' => 'email'));
+
+        return $this->response_obj;
+    }
+
     public function lookupByPhone($search)
     {
         $this->_execute(array('phone' => $search, 'method' => 'phone'));
