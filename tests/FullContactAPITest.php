@@ -18,23 +18,14 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
     {
         global $apikey;
 
-        $this->client = new FullContactAPI($apikey);
+        $this->client_old = new FullContactAPI($apikey);
 
         parent::setUp();
     }
 
-    public function testFailAPIKey()
-    {
-        $brokenRequest = new Services_FullContact_Name('nope, no good');
-
-        $name = $brokenRequest->normalize('John');
-        $this->assertEquals('403', $name->status);
-        $this->assertRegExp('/invalid/i', $name->message);
-    }
-
     public function testDoLookupEmail()
     {
-        $result = $this->client->doLookup('bart@fullcontact.com');
+        $result = $this->client_old->doLookup('bart@fullcontact.com');
         $this->assertArrayHasKey('status', $result);
         $this->assertEquals(200, $result['status']);
         $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
@@ -43,14 +34,14 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
 
     public function testBadEmail()
     {
-        $result = $this->client->doLookup('bart@fullcontact');
+        $result = $this->client_old->doLookup('bart@fullcontact');
         $this->assertEquals(422, $result['status']);
         $this->assertRegExp('/invalid/i', $result['message']);
     }
 
     public function testDoLookupPhone()
     {
-        $result = $this->client->doLookup('3037170414', 'phone');
+        $result = $this->client_old->doLookup('3037170414', 'phone');
         $this->assertArrayHasKey('status', $result);
         $this->assertEquals(200, $result['status']);
         $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
@@ -59,7 +50,7 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
 
     public function testBadPhone()
     {
-        $result = $this->client->doLookup('303717');
+        $result = $this->client_old->doLookup('303717');
         $this->assertEquals(422, $result['status']);
         $this->assertRegExp('/invalid/i', $result['message']);
     }
@@ -67,7 +58,7 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
 
     public function testDoLookupTwitter()
     {
-        $result = $this->client->doLookup('lorangb', 'twitter');
+        $result = $this->client_old->doLookup('lorangb', 'twitter');
         $this->assertArrayHasKey('status', $result);
         $this->assertEquals(200, $result['status']);
         $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
@@ -76,7 +67,7 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
 
     public function testDoLookupFacebook()
     {
-        $result = $this->client->doLookup('bart.lorang', 'facebookUsername');
+        $result = $this->client_old->doLookup('bart.lorang', 'facebookUsername');
         $this->assertArrayHasKey('status', $result);
         $this->assertEquals(200, $result['status']);
         $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
