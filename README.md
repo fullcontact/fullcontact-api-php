@@ -21,6 +21,14 @@ The code itself is pretty simple. You initialize the selected object with the AP
 $this->name = new Services_FullContact_Name($apikey);
 ```
 
+## Testing
+
+This is set up to use a basic PHPUnit configuration. I happened to use 3.7.8 but it shouldn't make a difference. From the root of the project, you should be able to execute the tests using:
+
+```shell
+phpunit tests/
+```
+
 ## TODO
 
 **This library is not complete but here is the active todo list.**
@@ -51,6 +59,7 @@ $this->name = new Services_FullContact_Name($apikey);
 *  Implement the CardShark resource
 *  Implement disposable email address detection
 *  Implement account stats retrieval
+*  Update the library to be backwards compatible with the previous official version
 
 
 ## License
