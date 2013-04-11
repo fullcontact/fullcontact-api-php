@@ -75,6 +75,10 @@ class Services_FullContact
         $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
         $this->response_obj  = json_decode($this->response_json);
 
+        if ('403' == $this->response_code) {
+            throw new Services_FullContact_Exception_NoCredit($this->response_obj->message);
+        }
+
         return $this->response_obj;
     }
 }
