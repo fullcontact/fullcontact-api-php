@@ -1,6 +1,6 @@
 <?php
 
-include_once 'creds.php';
+include_once '../creds.php';
 include_once('../src/FullContact.php');
 
 //initialize our FullContact API object
