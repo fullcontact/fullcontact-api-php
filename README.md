@@ -55,6 +55,7 @@ phpunit tests/
  *  ~~Implement normalization using includeZeroPopulation and casing~~
  *  ~~Implement enrichment using includeZeroPopulation and casing~~
 *  For the Icon resource
+ *  ~~Implement the way to get all available icons~~
  *  Implement icon retrieval using size and type
 *  Implement the CardShark resource
 *  Implement disposable email address detection
