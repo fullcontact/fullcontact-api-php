@@ -5,7 +5,7 @@ This is a PHP helper for the FullContact API - http://www.fullcontact.com/
 
 It is modeled after the Twilio PHP Helper library because I think it's generally well done and thought through. This isn't official but should generally work except for the incomplete items in the TODO list below.
 
-This is **v0.1** so it is super rudimentary and subject to change at any time.. like now. Or maybe now.
+This is **v0.2** so it is super rudimentary and subject to change at any time.. like now. Or maybe now.
 
 ## Requirements
 
@@ -59,19 +59,13 @@ phpunit tests/
 *  Implement the CardShark resource
 *  Implement disposable email address detection
 *  Implement account stats retrieval
-*  Update the library to be backwards compatible with the previous official version
+*  ~~Update the library to be backwards compatible with the previous official version~~
 *  Update the test to use Mocks instead of live API hits.. because it could drain your account credits. Doh.
 
 
 ## License
 
 All code included is Apache License.
-
-Everything in the src folder:
-
-Copyright 2012 FullContact, Inc. (the original fork)
-
-Everything else:
 
 Copyright (C) 2013, Keith Casey <contrib at caseysoftware dot com>
 

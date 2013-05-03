@@ -22,7 +22,7 @@ spl_autoload_register('Services_FullContact_autoload');
  */
 class Services_FullContact
 {
-    const USER_AGENT = 'caseysoftware/fullcontact-php 0.1';
+    const USER_AGENT = 'caseysoftware/fullcontact-php-0.2';
 
     protected $_baseUri = 'https://api.fullcontact.com/';
     protected $_version = 'v2';
