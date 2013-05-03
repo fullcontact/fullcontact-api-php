@@ -34,7 +34,7 @@ phpunit tests/
 **This library is not complete but here is the active todo list.**
 
 *  For the Person resource
- *  Implement lookup by ~~email~~ and emailMD5
+ *  ~~Implement lookup by email and emailMD5~~
   *  Implement style for outputting (lookup by email only)
  *  ~~Implement lookup by phone~~
   *  Implement countryCode for non-US/Canada phone numbers
@@ -47,10 +47,10 @@ phpunit tests/
  *  Implement Enhanced Lookup retrieval
 *  For the Name resource
  *  ~~Implement normalization with casing~~
- *  Implement deducer using ~~email~~ or username with casing
+ *  ~~Implement deducer using email or username with casing~~
  *  ~~Implement similarity with casing~~
- *  Implement stats using name, givenName, familyName, and casing
- *  Implement parser with casing
+ *  Implement stats with casing using ~~name, givenName, familyName,~~ and both (givenName and familyName)
+ *  ~~Implement parser with casing~~
 *  For the Location resource
  *  Implement normalization using includeZeroPopulation and casing
  *  Implement enrichment using includeZeroPopulation and casing

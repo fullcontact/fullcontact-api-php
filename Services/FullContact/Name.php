@@ -48,6 +48,14 @@ class Services_FullContact_Name extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * These are two names to compare.
+     * 
+     * @param type $name1
+     * @param type $name2
+     * @param type $casing
+     * @return type 
+     */
     public function similarity($name1, $name2, $casing = 'titlecase')
     {
         $this->_resourceUri = '/name/similarity.json';
@@ -55,12 +63,19 @@ class Services_FullContact_Name extends Services_FullContact
 
         return $this->response_obj;
     }
-    public function stats()
+
+    public function stats($value, $type = 'givenName', $casing = 'titlecase')
     {
-        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
+        $this->_resourceUri = '/name/stats.json';
+        $this->_execute(array($type => $value, 'method' => 'stats', 'casing' => $casing));
+
+        return $this->response_obj;
     }
-    public function parser()
+    public function parser($name, $casing = 'titlecase')
     {
-        trigger_error(__FUNCTION__ . " not implemented yet.", E_USER_NOTICE);
+        $this->_resourceUri = '/name/parser.json';
+        $this->_execute(array('q' => $name, 'method' => 'parser', 'casing' => $casing));
+
+        return $this->response_obj;
     }
 }
