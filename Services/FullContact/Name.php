@@ -23,7 +23,7 @@ class Services_FullContact_Name extends Services_FullContact
      * @param type $casing -> valid values are uppercase, lowercase, titlecase
      * @return type
      */
-    public function normalize($name, $casing = 'titlecase')
+    public function normalizer($name, $casing = 'titlecase')
     {
         $this->_resourceUri = '/name/normalizer.json';
         $this->_execute(array('q' => $name, 'method' => 'normalizer', 'casing' => $casing));
