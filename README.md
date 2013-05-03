@@ -51,9 +51,9 @@ phpunit tests/
  *  ~~Implement similarity with casing~~
  *  Implement stats with casing using ~~name, givenName, familyName,~~ and both (givenName and familyName)
  *  ~~Implement parser with casing~~
-*  For the Location resource
- *  Implement normalization using includeZeroPopulation and casing
- *  Implement enrichment using includeZeroPopulation and casing
+*  ~~For the Location resource~~
+ *  ~~Implement normalization using includeZeroPopulation and casing~~
+ *  ~~Implement enrichment using includeZeroPopulation and casing~~
 *  For the Icon resource
  *  Implement icon retrieval using size and type
 *  Implement the CardShark resource
