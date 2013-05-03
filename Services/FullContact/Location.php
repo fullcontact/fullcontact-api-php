@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This class doesn't do much yet..
+ * This class handles all the Location information
  *
  * @package  Services\FullContact
  * @author   Keith Casey <contrib@caseysoftware.com>
