@@ -5,7 +5,7 @@ This is a PHP helper for the FullContact API - http://www.fullcontact.com/
 
 It is modeled after the Twilio PHP Helper library because I think it's generally well done and thought through. This isn't official but should generally work except for the incomplete items in the TODO list below.
 
-This is **v0.1** so it is super rudimentary and subject to change at any time.. like now. Or maybe now.
+This is **v0.2** so it is super rudimentary and subject to change at any time.. like now. Or maybe now.
 
 ## Requirements
 
@@ -34,7 +34,7 @@ phpunit tests/
 **This library is not complete but here is the active todo list.**
 
 *  For the Person resource
- *  Implement lookup by ~~email~~ and emailMD5
+ *  ~~Implement lookup by email and emailMD5~~
   *  Implement style for outputting (lookup by email only)
  *  ~~Implement lookup by phone~~
   *  Implement countryCode for non-US/Canada phone numbers
@@ -47,31 +47,26 @@ phpunit tests/
  *  Implement Enhanced Lookup retrieval
 *  For the Name resource
  *  ~~Implement normalization with casing~~
- *  Implement deducer using ~~email~~ or username with casing
+ *  ~~Implement deducer using email or username with casing~~
  *  ~~Implement similarity with casing~~
- *  Implement stats using name, givenName, familyName, and casing
- *  Implement parser with casing
-*  For the Location resource
- *  Implement normalization using includeZeroPopulation and casing
- *  Implement enrichment using includeZeroPopulation and casing
+ *  Implement stats with casing using ~~name, givenName, familyName,~~ and both (givenName and familyName)
+ *  ~~Implement parser with casing~~
+*  ~~For the Location resource~~
+ *  ~~Implement normalization using includeZeroPopulation and casing~~
+ *  ~~Implement enrichment using includeZeroPopulation and casing~~
 *  For the Icon resource
+ *  ~~Implement the way to get all available icons~~
  *  Implement icon retrieval using size and type
 *  Implement the CardShark resource
 *  Implement disposable email address detection
 *  Implement account stats retrieval
-*  Update the library to be backwards compatible with the previous official version
+*  ~~Update the library to be backwards compatible with the previous official version~~
 *  Update the test to use Mocks instead of live API hits.. because it could drain your account credits. Doh.
 
 
 ## License
 
 All code included is Apache License.
-
-Everything in the src folder:
-
-Copyright 2012 FullContact, Inc. (the original fork)
-
-Everything else:
 
 Copyright (C) 2013, Keith Casey <contrib at caseysoftware dot com>
 
