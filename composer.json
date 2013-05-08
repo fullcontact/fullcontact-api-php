@@ -1,0 +1,25 @@
+{
+    "name": "caseysoftware/fullcontact-helper",
+    "type": "library",
+    "description": "A PHP wrapper for Full Contacts's API",
+    "keywords": ["fullcontact", "address", "api"],
+    "homepage": "http://github.com/caseysoftware/fullcontact-api-php",
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Keith Casey",
+            "email": "contrib@caseysoftware.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.1"
+    },
+    "require-dev": {
+        "mockery/mockery": ">=0.7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "Services_FullContact": ""
+        }
+    }
+}
