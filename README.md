@@ -5,7 +5,7 @@ This is a PHP helper for the FullContact API - http://www.fullcontact.com/
 
 It is modeled after the Twilio PHP Helper library because I think it's generally well done and thought through. This isn't official but should generally work except for the incomplete items in the TODO list below.
 
-This is **v0.2** so it is super rudimentary and subject to change at any time.. like now. Or maybe now.
+This is v0.9.0 so it is pretty stable and I don't expect the interfaces to change much if at all.
 
 ## Requirements
 
