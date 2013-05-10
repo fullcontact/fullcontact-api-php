@@ -50,28 +50,22 @@ class FullContactAPI {
      *   depending on the specified search type)
      * @param String - Search Type (Specify the API search method to use.
      *   E.g. email -- tested with email and phone)
-     * @param String (optional) - timeout
+     * @param Int (optional) - timeout
      *
      * @return Array - All information associated with this email address
      */
-    public function doLookup($term = null, $type="email", $timeout = 30)
+    public function doLookup($term, $type = "email", $timeout = 30)
     {
         if(!in_array($type, $this->_supportedMethods)){
             throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
         }
 
-        $return_value = null;
+        $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
 
-        if ($term != null) {
-
-            $result = $this->_restHelper(FC_BASE_URL . FC_API_VERSION . "/person.json?{$type}=" . urlencode($term) . "&apiKey=" . urlencode($this->_apiKey) . "&timeoutSeconds=" . urlencode($timeout));
-
-            if ($result != null) {
-                $return_value = $result;
-            }//end inner if
-        }//end outer if
-
-        return $return_value;
+        if ($result != null) {
+            return $result;
+        }//end if
+        
     }
 
     /**
@@ -98,12 +92,6 @@ class FullContactAPI {
     {
 
         $return_value = null;
-
-        $http_params = array(
-            'http' => array(
-                'method' => "GET",
-                'ignore_errors' => true
-        ));
 
         $curl = curl_init($json_endpoint);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -136,7 +124,7 @@ class FullContactAPI {
             }// end inner else
 
         } else {
-            throw new Exception("$verb $json_endpoint failed");
+            throw new Exception("Failed to reach $json_endpoint");
         }//end outer else
 
         curl_close($curl);
