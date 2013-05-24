@@ -68,7 +68,7 @@ phpunit tests/
 
 All code included is Apache License.
 
-Copyright (C) 2013, Keith Casey <contrib at caseysoftware dot com>
+Copyright (C) 2013, FullContact and contributors
 
 
 Licensed under the Apache License, Version 2.0 (the "License");
