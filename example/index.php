@@ -1,7 +1,7 @@
 <?php
 
-include_once 'creds.php';
-include_once('../src/FullContact.php');
+include_once '../creds.php';
+include_once '../Services/FullContact.php';
 
 //initialize our FullContact API object
 //get your api key here:  http://fullcontact.com/getkey
