@@ -1,5 +1,5 @@
 {
-    "name": "caseysoftware/fullcontact-helper",
+    "name": "fullcontact/sdk",
     "type": "library",
     "description": "A PHP wrapper for Full Contacts's API",
     "keywords": ["fullcontact", "address", "api"],
