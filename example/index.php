@@ -5,7 +5,7 @@ include_once '../Services/FullContact.php';
 
 //initialize our FullContact API object
 //get your api key here:  http://fullcontact.com/getkey
-$fullcontact = new FullContactAPI($apikey);
+$fullcontact = new Services_FullContact_API($apikey);
 
 //do a lookup
 $result = $fullcontact->doLookup('bart@fullcontact.com');
