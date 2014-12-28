@@ -42,6 +42,8 @@ class Services_FullContact
     protected $_version = 'v2';
 
     protected $_apiKey = null;
+    protected $_webhookUrl = null;
+    protected $_webhookId = null;
 
     public $response_obj  = null;
     public $response_code = null;
@@ -59,10 +61,26 @@ class Services_FullContact
     }
 
     /**
+     * This sets the webhook url for all requests made for this service 
+     * instance. To unset, just use setWebhookUrl(null).
+     *
+     * @author  David Boskovic <me@david.gs> @dboskovic
+     * @param   string $url
+     * @param   string $id
+     * @return  object
+     */
+    public function setWebhookUrl($url, $id = null) {
+        $this->_webhookUrl = $url;
+        $this->_webhookId  = $id;
+        return $this;
+    }
+
+    /**
      * This is a pretty close copy of my work on the Contactually PHP library
      *   available here: http://github.com/caseysoftware/contactually-php
      *
      * @author  Keith Casey <contrib@caseysoftware.com>
+     * @author  David Boskovic <me@david.gs> @dboskovic
      * @param   array $params
      * @return  object
      * @throws  Services_FullContact_Exception_NotImplemented
@@ -74,7 +92,15 @@ class Services_FullContact
                     " does not support the [" . $params['method'] . "] method");
         }
 
-        $params['apiKey'] = urlencode($this->_apiKey);
+        $params['apiKey'] = $this->_apiKey;
+
+        if($this->_webhookUrl) {
+            $params['webhookUrl'] = $this->_webhookUrl;
+        }
+
+        if($this->_webhookId) {
+            $params['webhookId'] = $this->_webhookId;
+        }
 
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
                 '?' . http_build_query($params);

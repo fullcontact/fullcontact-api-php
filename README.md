@@ -42,7 +42,7 @@ phpunit tests/
  *  ~~Implement lookup by facebookUsername~~
  *  Implement lookup by vCard
  *  Implement queue and callback for queue-based processing
- *  Implement webhookUrl and webhookId for asynchronous processing
+ *  --Implement webhookUrl and webhookId for asynchronous processing--
  *  Implement css and prettyPrint for output
  *  Implement Enhanced Lookup retrieval
 *  For the Name resource
