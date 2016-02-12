@@ -79,13 +79,4 @@ class FullContactAPITest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
         $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
     }
-
-    public function testDoLookupFacebook()
-    {
-        $result = $this->client_old->doLookup('bart.lorang', 'facebookUsername');
-        $this->assertArrayHasKey('status', $result);
-        $this->assertEquals(200, $result['status']);
-        $this->assertEquals('Lorang', $result['contactInfo']['familyName']);
-        $this->assertGreaterThanOrEqual(11, count($result['socialProfiles']));
-    }
 }

@@ -39,8 +39,6 @@ class Services_FullContact_API extends Services_FullContact_Person
             case 'twitter':
                 $this->lookupByTwitter($search);
                 break;
-            case 'facebookUsername':
-                $this->lookupByFacebook($search);
             default:
                 throw new FullContactAPIException("UnsupportedLookupMethodException: Invalid lookup method specified [{$type}]");
                 break;

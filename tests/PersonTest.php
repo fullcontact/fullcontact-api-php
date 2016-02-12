@@ -63,9 +63,4 @@ class PersonTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('GitHub',   $person->contactInfo->fullName);
         $this->assertEquals(5,          count($person->socialProfiles));
     }
-
-    public function testLookupByFacebook()
-    {
-        $this->markTestIncomplete();
-    }
 }
