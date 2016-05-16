@@ -42,6 +42,7 @@ class Services_FullContact
     protected $_version = 'v2';
 
     protected $_apiKey = null;
+    protected $_webhookUrl = null;
 
     public $response_obj  = null;
     public $response_code = null;
@@ -51,11 +52,15 @@ class Services_FullContact
      * The base constructor needs the API key available from here:
      * http://fullcontact.com/getkey
      *
+     * Accepts an optional webhookUrl.
+     *
      * @param type $api_key
+     * @param string $webhookUrl
      */
-    public function __construct($api_key)
+    public function __construct($api_key, $webhookUrl = null)
     {
         $this->_apiKey = $api_key;
+        $this->_webhookUrl = $webhookUrl;
     }
 
     /**
@@ -75,6 +80,10 @@ class Services_FullContact
         }
 
         $params['apiKey'] = urlencode($this->_apiKey);
+
+        if ($this->_webhookUrl) {
+            $params['webhookUrl'] = $this->_webhookUrl;
+        }
 
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
                 '?' . http_build_query($params);
