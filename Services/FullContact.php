@@ -86,6 +86,7 @@ class Services_FullContact
             $params['webhookId'] = $this->_webhookId;
         }
 
+
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
             '?' . http_build_query($params);
 
