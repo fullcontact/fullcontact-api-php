@@ -61,35 +61,20 @@ class Services_FullContact
     }
 
     /**
-     * This sets the webhook url for all requests made for this service 
-     * instance. To unset, just use setWebhookUrl(null).
-     *
-     * @author  David Boskovic <me@david.gs> @dboskovic
-     * @param   string $url
-     * @param   string $id
-     * @return  object
-     */
-    public function setWebhookUrl($url, $id = null) {
-        $this->_webhookUrl = $url;
-        $this->_webhookId  = $id;
-        return $this;
-    }
-
-    /**
      * This is a pretty close copy of my work on the Contactually PHP library
      *   available here: http://github.com/caseysoftware/contactually-php
      *
      * @author  Keith Casey <contrib@caseysoftware.com>
-     * @author  David Boskovic <me@david.gs> @dboskovic
      * @param   array $params
      * @return  object
      * @throws  Services_FullContact_Exception_NotImplemented
      */
+
     protected function _execute($params = array())
     {
         if(!in_array($params['method'], $this->_supportedMethods)){
             throw new Services_FullContact_Exception_NotImplemented(__CLASS__ .
-                    " does not support the [" . $params['method'] . "] method");
+                " does not support the [" . $params['method'] . "] method");
         }
 
         $params['apiKey'] = $this->_apiKey;
@@ -97,23 +82,36 @@ class Services_FullContact
         if($this->_webhookUrl) {
             $params['webhookUrl'] = $this->_webhookUrl;
         }
-
         if($this->_webhookId) {
             $params['webhookId'] = $this->_webhookId;
         }
 
+
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
-                '?' . http_build_query($params);
+            '?' . http_build_query($params);
 
         //open connection
         $connection = curl_init($fullUrl);
         curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
+        curl_setopt($connection, CURLOPT_HEADER, 1);
 
         //execute request
         $this->response_json = curl_exec($connection);
         $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
-        $this->response_obj  = json_decode($this->response_json);
+
+        preg_match_all('/X-Rate-Limit-.{0,}/',$this->response_json, $out, PREG_PATTERN_ORDER);
+        preg_match("/\d{1,}/",$out[0][0],$limit);
+        preg_match("/\d{1,}/",$out[0][1],$remaining);
+        preg_match("/\d{1,}/",$out[0][2],$reset);
+
+        $pos = strpos($this->response_json, '{');
+        $response = substr($this->response_json, $pos);
+
+        $this->response_obj = json_decode($response);
+        $this->response_obj->limit = $limit[0];
+        $this->response_obj->remaining_calls = $remaining[0];
+        $this->response_obj->remaining_seconds = $reset[0];
 
         if ('403' == $this->response_code) {
             throw new Services_FullContact_Exception_NoCredit($this->response_obj->message);
@@ -121,4 +119,6 @@ class Services_FullContact
 
         return $this->response_obj;
     }
+
+
 }
