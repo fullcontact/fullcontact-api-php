@@ -109,6 +109,7 @@ class Services_FullContact
         $connection = curl_init($fullUrl);
         curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
+        curl_setopt($connection, CURLOPT_SSL_VERIFYPEER, false);
 
         //execute request
         $this->response_json = curl_exec($connection);
