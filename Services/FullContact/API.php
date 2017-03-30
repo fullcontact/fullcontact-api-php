@@ -2,6 +2,10 @@
 
 class Services_FullContact_API extends Services_FullContact_Person
 {
+    /**
+     * Services_FullContact_API constructor.
+     * @param string $api_key
+     */
     public function __construct($api_key)
     {
         parent::__construct($api_key);

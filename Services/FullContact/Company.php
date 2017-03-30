@@ -30,6 +30,10 @@ class Services_FullContact_Company extends Services_FullContact
     protected $_supportedMethods = array('domain');
     protected $_resourceUri = '/company/lookup.json';
 
+    /**
+     * @param string $search
+     * @return stdClass
+     */
     public function lookupByDomain($search)
     {
         $this->_execute(array('domain' => $search, 'method' => 'domain'));

@@ -30,6 +30,10 @@ class Services_FullContact_Person extends Services_FullContact
     protected $_supportedMethods = array('email', 'phone', 'twitter');
     protected $_resourceUri = '/person.json';
 
+    /**
+     * @param string $search
+     * @return stdClass
+     */
     public function lookupByEmail($search)
     {
         $this->_execute(array('email' => $search, 'method' => 'email'));
@@ -37,6 +41,10 @@ class Services_FullContact_Person extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * @param string $search
+     * @return stdClass
+     */
     public function lookupByEmailMD5($search)
     {
         $this->_execute(array('emailMD5' => $search, 'method' => 'email'));
@@ -44,6 +52,10 @@ class Services_FullContact_Person extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * @param string $search
+     * @return stdClass
+     */
     public function lookupByPhone($search)
     {
         $this->_execute(array('phone' => $search, 'method' => 'phone'));
@@ -51,6 +63,10 @@ class Services_FullContact_Person extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * @param string $search
+     * @return stdClass
+     */
     public function lookupByTwitter($search)
     {
         $this->_execute(array('twitter' => $search, 'method' => 'twitter'));

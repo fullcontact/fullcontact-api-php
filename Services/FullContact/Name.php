@@ -28,14 +28,18 @@ class Services_FullContact_Name extends Services_FullContact
      * @var $_supportedMethods
      */
     protected $_supportedMethods = array('normalizer', 'deducer', 'similarity', 'stats', 'parser');
+
+    /**
+     * @var string
+     */
     protected $_resourceUri = '';
 
     /**
      * This takes a name and breaks it into its individual parts.
      *
-     * @param type $name
-     * @param type $casing -> valid values are uppercase, lowercase, titlecase
-     * @return type
+     * @param string $name
+     * @param string $casing -> valid values are uppercase, lowercase, titlecase
+     * @return stdClass
      */
     public function normalizer($name, $casing = 'titlecase')
     {
@@ -49,10 +53,10 @@ class Services_FullContact_Name extends Services_FullContact
      * This resolves a person's name from either their email address or a
      *   username. This is basically a wrapper for the Person lookup methods.
      *
-     * @param type $name
-     * @param type $type -> valid values are email and username
-     * @param type $casing -> valid values are uppercase, lowercase, titlecase
-     * @return type
+     * @param string $value
+     * @param string $type
+     * @param string $casing
+     * @return stdClass
      */
     public function deducer($value, $type = 'email', $casing = 'titlecase')
     {
@@ -65,10 +69,10 @@ class Services_FullContact_Name extends Services_FullContact
     /**
      * These are two names to compare.
      * 
-     * @param type $name1
-     * @param type $name2
-     * @param type $casing
-     * @return type 
+     * @param string $name1
+     * @param string $name2
+     * @param string $casing
+     * @return stdClass
      */
     public function similarity($name1, $name2, $casing = 'titlecase')
     {
@@ -78,6 +82,12 @@ class Services_FullContact_Name extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * @param string $value
+     * @param string $type
+     * @param string $casing
+     * @return stdClass
+     */
     public function stats($value, $type = 'givenName', $casing = 'titlecase')
     {
         $this->_resourceUri = '/name/stats.json';
@@ -85,6 +95,12 @@ class Services_FullContact_Name extends Services_FullContact
 
         return $this->response_obj;
     }
+
+    /**
+     * @param string $name
+     * @param string $casing
+     * @return stdClass
+     */
     public function parser($name, $casing = 'titlecase')
     {
         $this->_resourceUri = '/name/parser.json';
