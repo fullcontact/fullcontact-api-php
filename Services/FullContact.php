@@ -87,33 +87,36 @@ class Services_FullContact
      */
     protected function _execute($params = array())
     {
-        if(!in_array($params['method'], $this->_supportedMethods)){
+        if (!in_array($params['method'], $this->_supportedMethods)) {
             throw new Services_FullContact_Exception_NotImplemented(__CLASS__ .
-                    " does not support the [" . $params['method'] . "] method");
+                " does not support the [" . $params['method'] . "] method");
         }
 
-        $params['apiKey'] = $this->_apiKey;
-
-        if($this->_webhookUrl) {
+        if ($this->_webhookUrl) {
             $params['webhookUrl'] = $this->_webhookUrl;
         }
 
-        if($this->_webhookId) {
+        if ($this->_webhookId) {
             $params['webhookId'] = $this->_webhookId;
         }
 
         $fullUrl = $this->_baseUri . $this->_version . $this->_resourceUri .
-                '?' . http_build_query($params);
+            '?' . http_build_query($params);
+
+        $headers = [
+            'Authorization: Bearer ' . $this->_apiKey,
+        ];
 
         //open connection
         $connection = curl_init($fullUrl);
         curl_setopt($connection, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($connection, CURLOPT_USERAGENT, self::USER_AGENT);
+        curl_setopt($connection, CURLOPT_HTTPHEADER, $headers);
 
         //execute request
         $this->response_json = curl_exec($connection);
         $this->response_code = curl_getinfo($connection, CURLINFO_HTTP_CODE);
-        $this->response_obj  = json_decode($this->response_json);
+        $this->response_obj = json_decode($this->response_json);
 
         if ('403' == $this->response_code) {
             throw new Services_FullContact_Exception_NoCredit($this->response_obj->message);
