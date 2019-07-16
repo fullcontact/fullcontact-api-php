@@ -45,7 +45,11 @@ class Services_FullContact
     protected $_webhookUrl = null;
     protected $_webhookId = null;
 
+    /**
+     * @var stdClass
+     */
     public $response_obj  = null;
+
     public $response_code = null;
     public $response_json = null;
 
@@ -53,7 +57,7 @@ class Services_FullContact
      * The base constructor needs the API key available from here:
      * http://fullcontact.com/getkey
      *
-     * @param type $api_key
+     * @param string $api_key
      */
     public function __construct($api_key)
     {

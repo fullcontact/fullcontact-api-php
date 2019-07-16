@@ -26,6 +26,9 @@ class Services_FullContact_Icon extends Services_FullContact
     protected $_supportedMethods = array('available');
     protected $_resourceUri = '/icon/';
 
+    /**
+     * @return stdClass
+     */
     public function available()
     {
         $this->_execute(array('method' => 'available'));

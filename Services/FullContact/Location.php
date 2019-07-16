@@ -33,9 +33,10 @@ class Services_FullContact_Location extends Services_FullContact
     /**
      * This takes a name and breaks it into its individual parts.
      *
-     * @param type $name
-     * @param type $casing -> valid values are uppercase, lowercase, titlecase
-     * @return type
+     * @param string $place
+     * @param bool $includeZeroPopulation
+     * @param string $casing valid values are uppercase, lowercase, titlecase
+     * @return stdClass
      */
     public function normalizer($place, $includeZeroPopulation = false, $casing = 'titlecase')
     {
@@ -48,6 +49,12 @@ class Services_FullContact_Location extends Services_FullContact
         return $this->response_obj;
     }
 
+    /**
+     * @param string $place
+     * @param bool $includeZeroPopulation
+     * @param string $casing
+     * @return stdClass
+     */
     public function enrichment($place, $includeZeroPopulation = false, $casing = 'titlecase')
     {
         $includeZeroPopulation = ($includeZeroPopulation) ? 'true' : 'false';
